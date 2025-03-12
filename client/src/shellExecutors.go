@@ -101,7 +101,7 @@ func (e LinuxShellExecutor) RunCommand(command []string, timeout time.Duration) 
 }
 
 // RunMultiLineCommand executes a multiline command in Linux Bash with a timeout.
-// Returns exit code, stdout, stderr, and an error if applicable.
+// Returns exit code, stdout, stderr, and an error if applicable. Not implemented
 func (e LinuxShellExecutor) RunMultiLineCommand(str string, timeout time.Duration) (int, string, string, error) {
 	return -1, "", "", fmt.Errorf("multiLineCommand not implemented")
 }

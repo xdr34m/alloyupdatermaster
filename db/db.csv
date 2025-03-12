@@ -1,0 +1,3 @@
+hostname;managedby;produkt;ip-adresses
+test1;expname1;543263(expname1);127.0.0.1,192.168.0.1
+test2;expname2;398042(expname2);127.0.0.1,192.168.0.1

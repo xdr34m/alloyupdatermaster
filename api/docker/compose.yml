@@ -1,0 +1,27 @@
+services:
+  test_api:
+    container_name: fastapitest2
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports: #remove when moving to prod, should only be behind nginx
+      - 127.0.0.1:8000:8000
+    volumes:
+      - ../../data:/code/data
+    environment:
+      - "REDIS_PORT=6379"
+      - "REDIS_HOST=redistest2"
+      - "DATA_PATH=/code/data"
+  
+  test_redis:
+    container_name: redistest2
+    image: redis:latest
+    ports: #remove when moving to prod or use PW!
+      - 127.0.0.1:6379:6379 
+    volumes:
+      - ./docker_data/redis:/data #makes redis data persistent
+    command: [
+      "redis-server",
+      "--appendonly", "yes",
+      "--appendfsync", "always"
+    ]
