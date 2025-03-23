@@ -19,9 +19,29 @@ services:
     ports: #remove when moving to prod or use PW!
       - 127.0.0.1:6379:6379 
     volumes:
-      - ./docker_data/redis:/data #makes redis data persistent
+      - redis_data:/data #makes redis data persistent
     command: [
       "redis-server",
       "--appendonly", "yes",
       "--appendfsync", "always"
     ]
+  
+  test_mariadb:
+    container_name: mariadbtest
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: default
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./seven_twitter.sql:/docker-entrypoint-initdb.d/1.sql
+
+volumes:
+  mariadb_data:
+    name: mariadb_data
+  redis_data:
+    name: redis_data
